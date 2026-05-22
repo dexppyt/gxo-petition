@@ -123,12 +123,17 @@ document.getElementById("petitionForm").addEventListener("submit", async functio
   };
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbyqnYWi29A-xrsh8zjEUQP5vglmh0wV4YdV9f7UwAyFKxBuw36ruVwg6P9Mgag_7fOMdw/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    await const formData = new URLSearchParams();
+
+formData.append("firstName", data.firstName);
+formData.append("lastName", data.lastName);
+formData.append("employeeNumber", data.employeeNumber);
+formData.append("email", data.email);
+
+await fetch("https://script.google.com/macros/s/AKfycbyqnYWi29A-xrsh8zjEUQP5vglmh0wV4YdV9f7UwAyFKxBuw36ruVwg6P9Mgag_7fOMdw/exec", {
+  method: "POST",
+  body: formData
+});
 
     document.getElementById("status").innerText = "Thank you for signing!";
     document.getElementById("petitionForm").reset();
