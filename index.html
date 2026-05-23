@@ -1,34 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GXO Lelystad Petition</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f0e8;
+  margin: 0;
+  padding: 20px;
+  color: #1a1410;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+h1 { color: #b5321a; }
+
+p { line-height: 1.6; }
+
+ul { line-height: 1.6; }
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #b5321a;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#status {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+hr {
+  margin: 30px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- 🟢 PETYCJA -->
+<h1>GXO Lelystad – Collective Employee Petition</h1>
+
+<p><strong>To:</strong> HR Team, GXO Logistics</p>
+
+<h2>Subject: Formal objection to proposed contract changes and calendar restructuring</h2>
+
+<p>
+We are writing to you as a collective group of employees from various departments and job categories within GXO Logistics at the Lelystad Platform. We have all received the proposal regarding the new calendar layout implementation effective as of July 1st, 2026.
+</p>
+
+<p>
+First and foremost, we want to express our collective outrage and deep disagreement regarding the manner in which this situation is being handled. Receiving this notification on May 18th and forcing us to make a binding decision in the portal by June 1st is an absolute lack of respect toward employees.
+</p>
+
+<p>
+A modification of core contractual terms (primaire arbeidsvoorwaarden), such as lowering permanent contracted hours, is a major decision affecting financial stability. A two-week window without proper legal consultation is unacceptable.
+</p>
+
+<p>
+We therefore formally reject the proposal to reduce our current 39.1, 37.4, or 35.7 contracted hours. None of the undersigned will select reduced hour options or sign individual amendments.
+</p>
+
+<h3>Main concerns:</h3>
+
+<ul>
+<li>Lack of financial transparency regarding compensation model</li>
+<li>Career progression penalty causing loss of scale benefits</li>
+<li>Reduced mortgage capacity (Hypotheek) in the Netherlands</li>
+<li>Loss of overtime premiums (Overuren)</li>
+<li>Reduced vacation & IKB entitlement</li>
+<li>Lower holiday allowance (Vakantietoeslag)</li>
+<li>Impact on social security (WW / Ziektewet)</li>
+<li>Reduced pension accumulation (Pensioenfonds Vervoer)</li>
+<li>Negative impact on work-life balance</li>
+</ul>
+
+<p>
+We request immediate collective negotiation with HR before any implementation.
+</p>
+
+<hr>
+
+<!-- 🟢 FORM -->
+<h2>Sign the Petition</h2>
+
+<form id="petitionForm">
+
+<input type="text" id="firstName" placeholder="First Name" required />
+<input type="text" id="lastName" placeholder="Last Name" required />
+<input type="text" id="employeeNumber" placeholder="Employee Number" required />
+<input type="email" id="email" placeholder="Email Address" required />
+
+<button type="submit">Sign Petition</button>
+
+</form>
+
+<p id="status"></p>
+
+</div>
+
+<!-- 🟢 SCRIPT (FIXED — NO WHITE SCREEN) -->
 <script>
-document.getElementById("petitionForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
+window.addEventListener("DOMContentLoaded", function () {
 
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  const employeeNumber = document.getElementById("employeeNumber").value;
-  const email = document.getElementById("email").value;
+  const form = document.getElementById("petitionForm");
 
-  const formData = new URLSearchParams();
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  formData.append("firstName", firstName);
-  formData.append("lastName", lastName);
-  formData.append("employeeNumber", employeeNumber);
-  formData.append("email", email);
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const employeeNumber = document.getElementById("employeeNumber").value;
+    const email = document.getElementById("email").value;
 
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbzgvbAn4PCswfwHdPKIEySIXLnWCveGXBxn7g036KpvGoR275UfYbDU95CVrXS92bpMSA/exec", {
-      method: "POST",
-      body: formData
-    });
+    const formData = new URLSearchParams();
 
-    document.getElementById("status").innerText =
-      "Thank you for signing the petition.";
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("employeeNumber", employeeNumber);
+    formData.append("email", email);
 
-    document.getElementById("petitionForm").reset();
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbzgvbAn4PCswfwHdPKIEySIXLnWCveGXBxn7g036KpvGoR275UfYbDU95CVrXS92bpMSA/exec", {
+        method: "POST",
+        body: formData
+      });
 
-  } catch (err) {
-    document.getElementById("status").innerText =
-      "Error sending form.";
-    console.error(err);
-  }
+      document.getElementById("status").innerText =
+        "Signature submitted successfully ✔";
+
+      form.reset();
+
+    } catch (err) {
+      document.getElementById("status").innerText =
+        "Error submitting form";
+      console.error(err);
+    }
+
+  });
+
 });
 </script>
+
+</body>
+</html>
