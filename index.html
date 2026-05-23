@@ -142,9 +142,10 @@ document.getElementById("petitionForm").addEventListener("submit", function(e){
   data.append("email", document.getElementById("email").value);
 
   fetch(url, {
-    method: "POST",
-    body: data
-  })
+  method: "POST",
+  body: data,
+  mode: "no-cors"
+});
   .then(response => {
     console.log("STATUS:", response.status);
     return response.text();
