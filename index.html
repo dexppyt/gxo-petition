@@ -146,9 +146,10 @@ document.getElementById("petitionForm").addEventListener("submit", function(e){
   body: data,
   mode: "no-cors"
 });
-  .then(response => {
-    console.log("STATUS:", response.status);
-    return response.text();
+  document.getElementById("status").innerText =
+  "SUCCESS: Your signature has been submitted.";
+
+document.getElementById("petitionForm").reset();
   })
   .then(text => {
     console.log("RESPONSE:", text);
