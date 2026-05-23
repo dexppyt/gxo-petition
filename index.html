@@ -153,9 +153,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
     try {
       await fetch("https://script.google.com/macros/s/AKfycbzgvbAn4PCswfwHdPKIEySIXLnWCveGXBxn7g036KpvGoR275UfYbDU95CVrXS92bpMSA/exec", {
-        method: "POST",
-        body: formData
-      });
+  method: "POST",
+  body: formData,
+  mode: "no-cors"
+});
 
       document.getElementById("status").innerText = "Signature submitted ✔";
       form.reset();
