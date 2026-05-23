@@ -53,6 +53,13 @@ button{
   margin-top:10px;
   font-weight:bold;
 }
+
+.legal{
+  font-size:12px;
+  color:#444;
+  line-height:1.5;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -62,7 +69,7 @@ button{
 
 <h1>GXO Lelystad – Collective Petition</h1>
 
-<!-- 🟢 PETYCJA 1:1 (NIE ZMIENIONA) -->
+<!-- 🟢 PETYCJA 1:1 -->
 <div class="petitext">
 
 Dear HR Team,
@@ -98,14 +105,35 @@ The Undersigned GXO Employees / Lelystad Platform
 <input type="text" id="employeeNumber" placeholder="Employee Number" required />
 <input type="email" id="email" placeholder="Email Address" required />
 
+<label style="font-size:12px;">
+<input type="checkbox" id="consent" required />
+I agree to the processing of my personal data (GDPR / AVG)
+</label>
+
 <button type="submit">Sign Petition</button>
 </form>
 
 <p id="status"></p>
 
+<!-- 🟢 GDPR EN -->
+<div class="legal">
+<strong>Privacy Notice (GDPR)</strong><br>
+By signing this petition, you agree that your personal data (name, employee number, and email address) will be collected and stored solely for the purpose of this collective petition against GXO Logistics Lelystad.
+Your data will not be sold or shared with third parties and will only be used for submission to HR and relevant internal stakeholders.
+You may request deletion of your data at any time.
 </div>
 
-<!-- 🟢 FIXED SCRIPT -->
+<!-- 🟢 GDPR NL -->
+<div class="legal">
+<strong>Privacyverklaring (AVG)</strong><br>
+Door deze petitie te ondertekenen, gaat u ermee akkoord dat uw persoonsgegevens (naam, personeelsnummer en e-mailadres) worden verzameld en opgeslagen uitsluitend voor deze collectieve petitie tegen GXO Logistics Lelystad.
+Uw gegevens worden niet verkocht of gedeeld met derden en worden alleen gebruikt voor indiening bij HR en relevante interne stakeholders.
+U kunt op elk moment verzoeken om verwijdering van uw gegevens.
+</div>
+
+</div>
+
+<!-- 🟢 SCRIPT FIXED -->
 <script>
 window.addEventListener("DOMContentLoaded", function () {
 
@@ -113,6 +141,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+
+    const consent = document.getElementById("consent").checked;
+    if (!consent) return alert("You must accept GDPR");
 
     const formData = new URLSearchParams();
     formData.append("firstName", document.getElementById("firstName").value);
