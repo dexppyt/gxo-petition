@@ -130,30 +130,29 @@ AVG NL: Gegevens worden alleen gebruikt voor deze petitie en niet gedeeld.
 </div>
 
 <script>
-document.getElementById("petitionForm").addEventListener("submit", async function(e){
+document.getElementById("petitionForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const formData = new URLSearchParams();
+  const url = "https://script.google.com/macros/s/AKfycbxvY5K5Xm0BPKJyh-GMGujvWfNJ-wQuwHeW6N3rJaOLs4s9D7UdlqrKEkGnVS78i6AIJA/exec";
 
-  formData.append("firstName", document.getElementById("firstName").value);
-  formData.append("lastName", document.getElementById("lastName").value);
-  formData.append("employeeNumber", document.getElementById("employeeNumber").value);
-  formData.append("email", document.getElementById("email").value);
+  const data = new FormData();
+  data.append("firstName", document.getElementById("firstName").value);
+  data.append("lastName", document.getElementById("lastName").value);
+  data.append("employeeNumber", document.getElementById("employeeNumber").value);
+  data.append("email", document.getElementById("email").value);
 
-  try {
-    await fetch("https://script.google.com/macros/s/AKfycbxvY5K5Xm0BPKJyh-GMGujvWfNJ-wQuwHeW6N3rJaOLs4s9D7UdlqrKEkGnVS78i6AIJA/exec", {
-      method: "POST",
-      body: formData,
-      mode: "no-cors"
-    });
-
+  fetch(url, {
+    method: "POST",
+    body: data
+  })
+  .then(() => {
     document.getElementById("status").innerText = "Signed successfully.";
     document.getElementById("petitionForm").reset();
-
-  } catch (err) {
+  })
+  .catch((err) => {
     document.getElementById("status").innerText = "Error submitting form.";
     console.error(err);
-  }
+  });
 });
 </script>
 
